@@ -1,7 +1,7 @@
 import tensorflow as tf
 import tensorflow_addons as tfa
 
-class Encoder(tf.keras.layers.Layer):
+class Encoder(tf.keras.Model):
     def __init__(self):
 
         super().__init__()
@@ -24,7 +24,22 @@ class Encoder(tf.keras.layers.Layer):
         # output = layer2(x)
 
         return output
-class Decoder(tf.keras.layers.Layer):
+
+class Decoder(tf.keras.Model):
     def __init__(self):
         super().__init__()
     def call(self, input):
+
+        return output
+
+class Attention(tf.keras.layers.Layer):
+
+    def __init__(self):
+        super().__init__()
+        self.softmax = tf.keras.layers.Softmax()
+    def call(self, h_state):
+
+        annotation = tf.keras.layers.TimeDistributed(tf.keras.layers.Dense(1))(h_state)
+        output = self.softmax(annotation)
+
+        return output
